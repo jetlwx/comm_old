@@ -4,7 +4,7 @@ import "sync"
 
 type Pool struct {
 	queue chan int
-	wg    *sync.WaitGroup
+	Wg    *sync.WaitGroup
 }
 
 // 创建并发控制池, 设置并发数量与总数量
@@ -14,9 +14,9 @@ func NewPool(cap, total int) *Pool {
 	}
 	p := &Pool{
 		queue: make(chan int, cap),
-		wg:    new(sync.WaitGroup),
+		Wg:    new(sync.WaitGroup),
 	}
-	p.wg.Add(total)
+	p.Wg.Add(total)
 	return p
 }
 
@@ -28,7 +28,7 @@ func (p *Pool) AddOne() {
 // 并发队列中释放一个, 并从总数量中减去一个
 func (p *Pool) DelOne() {
 	<-p.queue
-	p.wg.Done()
+	p.Wg.Done()
 }
 
 //----------------------how to use it ----------------------
