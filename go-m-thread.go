@@ -1,4 +1,4 @@
-package goMutilThread
+package comm
 
 import "sync"
 
